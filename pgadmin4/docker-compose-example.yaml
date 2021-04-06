@@ -1,13 +1,21 @@
-version: '3'
+version: '3.6'
+
 services:
-  web:
-    image: 'dpage/pgadmin4:latest'
-    environment:
-      PGADMIN_DEFAULT_EMAIL: 'PUT YOUR EMAIL ADDRESS HERE <contact@domain.com>'
-      PGADMIN_DEFAULT_PASSWORD: 'PUT YOUR PASSWORD HERE'
-      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
-      PGADMIN_CONFIG_LOGIN_BANNER: '"Authorised users only!"'
-      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
-    restart: always
-    ports:
-      - '8686:80'
+    pgadmin4:
+        image: 'dpage/pgadmin4:5.0'
+        container_name: pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 'PUT YOUR EMAIL ADDRESS HERE <contact@domain.com>'
+            PGADMIN_DEFAULT_PASSWORD: 'PUT YOUR PASSWORD HERE'
+            PGADMIN_LISTEN_PORT: 8432
+            PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+            PGADMIN_CONFIG_LOGIN_BANNER: '"Authorised users only!"'
+            PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+        restart: always
+        volumes:
+            - pgadmin4_data:/var/lib/pgadmin
+        network_mode: host
+
+volumes:
+    pgadmin4_data:
+        name: pgadmin4_data
