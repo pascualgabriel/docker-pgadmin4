@@ -1,2 +1,1 @@
-# containerized-pgadmin4
-
+# docker-pgadmin4
